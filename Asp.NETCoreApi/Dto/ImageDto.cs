@@ -7,8 +7,6 @@ namespace Asp.NETCoreApi.Dto {
         // Use byte[] for storing image data
         public byte[] Data { get; set; }
 
-        public int ColorId { get; set; }
-
 
     }
 }
