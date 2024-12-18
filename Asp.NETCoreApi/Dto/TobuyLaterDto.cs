@@ -5,5 +5,7 @@
         public int SizeId { get; set; }
 
         public string UserId { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

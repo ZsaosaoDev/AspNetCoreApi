@@ -24,8 +24,9 @@ namespace Asp.NETCoreApi.Controllers {
 
             var result = await _accountRepository.SignUpAsync(model);
 
-            if (result.StatusCode != 200) // Assuming 200 is the success code
+            if (result.StatusCode != 200) {
                 return BadRequest(result.Message);
+            }
 
             // Set HTTP-only cookies for tokens
             Response.Cookies.Append("accessToken", result.AccessToken, new CookieOptions {
@@ -55,8 +56,9 @@ namespace Asp.NETCoreApi.Controllers {
 
             var result = await _accountRepository.SignInAsync(model);
 
-            if (result.StatusCode != 200) // Assuming 200 is the success code
+            if (result.StatusCode != 200) {
                 return Unauthorized(result.Message);
+            }
 
             // Set HTTP-only cookies for tokens
             Response.Cookies.Append("accessToken", result.AccessToken, new CookieOptions {

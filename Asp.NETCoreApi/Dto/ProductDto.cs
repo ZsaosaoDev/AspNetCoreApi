@@ -14,6 +14,7 @@ namespace Asp.NETCoreApi.Dto {
 
         public int CategoryProductDtoId { get; set; }
 
+
         [Required]
         public List<ColorDto> ColorDtos { get; set; }
 

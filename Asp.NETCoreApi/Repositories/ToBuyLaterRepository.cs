@@ -62,24 +62,27 @@ namespace Asp.NETCoreApi.Repositories {
 
         public async Task<List<ProductDto>> GetProductsWithSelectedColors (string userId) {
             // Fetch selected SizeIds for the user from the ToBuyLater table
-            var selectedSizeIds = await _context.ToBuyLaters
+            var toBuyLaters = await _context.ToBuyLaters
                 .Where(t => t.UserId == userId)
-                .Select(t => t.SizeId) // Chỉ lấy SizeId
-                .Distinct() // Loại bỏ trùng lặp (nếu có)
                 .ToListAsync();
 
+            var selectedSizeIds = toBuyLaters
+                .Select(t => t.SizeId)
+                .Distinct()
+                .ToList();
+
             // Nếu không có SizeId nào được chọn, trả về danh sách rỗng
-            if (selectedSizeIds.Count == 0) {
+            if (!selectedSizeIds.Any()) {
                 return new List<ProductDto>();
             }
 
             // Fetch all products that have colors and sizes matching the selected sizes
             var products = await _context.Products
-                .Include(p => p.Colors) // Include Colors
-                    .ThenInclude(c => c.Sizes) // Include Sizes
                 .Include(p => p.Colors)
-                    .ThenInclude(c => c.Images) // Include Images
-                .Where(p => p.Colors.Any(c => c.Sizes.Any(s => selectedSizeIds.Contains(s.SizeId)))) // Filter by selected sizes
+                    .ThenInclude(c => c.Sizes)
+                .Include(p => p.Colors)
+                    .ThenInclude(c => c.Images)
+                .Where(p => p.Colors.Any(c => c.Sizes.Any(s => selectedSizeIds.Contains(s.SizeId))))
                 .ToListAsync();
 
             // Map products to ProductDto and filter/mark selected sizes and colors
@@ -92,8 +95,7 @@ namespace Asp.NETCoreApi.Repositories {
                     ColorDtoId = color.ColorId,
                     Name = color.Name,
                     HexCode = color.HexCode,
-                    IsPreviouslySelected = color.Sizes
-                        .Any(size => selectedSizeIds.Contains(size.SizeId)), // Check if any size matches
+                    IsPreviouslySelected = color.Sizes.Any(size => selectedSizeIds.Contains(size.SizeId)), // Check if any size matches
                     SizeDtos = color.Sizes
                         .Where(size => selectedSizeIds.Contains(size.SizeId)) // Chỉ lấy các size được chọn
                         .Select(size => new SizeDto {
@@ -104,12 +106,16 @@ namespace Asp.NETCoreApi.Repositories {
                     ImageDtos = color.Images.Select(image => new ImageDto {
                         ImageDtoId = image.ImageId,
                         Data = image.Data
-                    }).ToList()
+                    }).ToList(),
+                    SelectedQuantity = toBuyLaters
+                        .Where(t => color.Sizes.Any(s => s.SizeId == t.SizeId))
+                        .Sum(t => t.Quantity) // Tổng số lượng đặt cho màu
                 }).ToList()
             }).ToList();
 
             return productDtos;
         }
+
 
 
 

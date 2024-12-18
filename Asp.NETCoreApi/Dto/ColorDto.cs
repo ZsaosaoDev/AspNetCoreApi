@@ -15,5 +15,6 @@
         public List<ImageDto> ImageDtos { get; set; }
         public bool IsPreviouslySelected { get; internal set; }
         public int Quantity { get; internal set; }
+        public int SelectedQuantity { get; internal set; }
     }
 }
