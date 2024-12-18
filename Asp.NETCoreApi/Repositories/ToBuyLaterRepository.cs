@@ -97,19 +97,19 @@ namespace Asp.NETCoreApi.Repositories {
                     HexCode = color.HexCode,
                     IsPreviouslySelected = color.Sizes.Any(size => selectedSizeIds.Contains(size.SizeId)), // Check if any size matches
                     SizeDtos = color.Sizes
-                        .Where(size => selectedSizeIds.Contains(size.SizeId)) // Chỉ lấy các size được chọn
+                        .Where(size => selectedSizeIds.Contains(size.SizeId)) // Only take selected sizes
                         .Select(size => new SizeDto {
                             SizeDtoId = size.SizeId,
                             Name = size.Name,
-                            Stock = size.Stock
+                            Stock = size.Stock,
+                            QuantityOrder = toBuyLaters
+                                .Where(t => t.SizeId == size.SizeId)
+                                .Sum(t => t.Quantity) // Set QuantityOrder per size
                         }).ToList(),
                     ImageDtos = color.Images.Select(image => new ImageDto {
                         ImageDtoId = image.ImageId,
                         Data = image.Data
-                    }).ToList(),
-                    SelectedQuantity = toBuyLaters
-                        .Where(t => color.Sizes.Any(s => s.SizeId == t.SizeId))
-                        .Sum(t => t.Quantity) // Tổng số lượng đặt cho màu
+                    }).ToList()
                 }).ToList()
             }).ToList();
 

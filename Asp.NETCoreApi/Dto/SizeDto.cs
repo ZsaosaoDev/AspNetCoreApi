@@ -6,7 +6,6 @@
 
         public int Stock { get; set; }
 
-        public int ColorId { get; set; }
-        public int Quantity { get; internal set; }
+        public int QuantityOrder { get; internal set; }
     }
 }
