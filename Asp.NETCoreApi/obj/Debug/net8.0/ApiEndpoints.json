@@ -208,6 +208,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Asp.NETCoreApi.Controllers.ToBuyLaterController",
+    "Method": "UpdateQuantityInBuyLater",
+    "RelativePath": "api/UpdateQuantityInBuyLater",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Asp.NETCoreApi.Dto.ToBuyLaterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Asp.NETCoreApi.Controllers.ProductCategoryController",
     "Method": "GetProductCategoryByName",
     "RelativePath": "GetProductCategoryByName",

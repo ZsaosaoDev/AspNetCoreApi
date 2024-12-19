@@ -1,4 +1,5 @@
-﻿using Asp.NETCoreApi.Helper;
+﻿using Asp.NETCoreApi.Dto;
+using Asp.NETCoreApi.Helper;
 using Asp.NETCoreApi.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,25 @@ namespace Asp.NETCoreApi.Controllers {
             }
             catch (Exception ex) {
                 // Handle any errors gracefully
+                return StatusCode(500, new { message = "An error occurred", error = ex.Message });
+            }
+        }
+
+
+        [Authorize(Roles = AppRole.Customer)]
+        [HttpPost("api/UpdateQuantityInBuyLater")]
+        public async Task<IActionResult> UpdateQuantityInBuyLater ([FromBody] ToBuyLaterDto request) {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId)) {
+                return Unauthorized(new { message = "User ID not found" });
+            }
+
+            try {
+                var result = await _toBuyLaterRepository.UpdateQuantityInBuyLater(request.SizeId, userId, request.Quantity);
+                return Ok(new { message = result });
+            }
+            catch (Exception ex) {
                 return StatusCode(500, new { message = "An error occurred", error = ex.Message });
             }
         }

@@ -117,6 +117,46 @@ namespace Asp.NETCoreApi.Repositories {
         }
 
 
+        public async Task<string> UpdateQuantityInBuyLater (int sizeId, string userId, int quantity) {
+            try {
+                // Validate that quantity is positive
+                if (quantity <= 0) {
+                    return "Quantity must be greater than zero";
+                }
+
+                // Check if the size exists
+                var sizeExists = await _context.Sizes.AnyAsync(s => s.SizeId == sizeId);
+                if (!sizeExists) {
+                    return "Size does not exist";
+                }
+
+                // Find the existing ToBuyLater item for the user and size
+                var existingToBuyLater = await _context.ToBuyLaters
+                    .FirstOrDefaultAsync(t => t.UserId == userId && t.SizeId == sizeId);
+
+                if (existingToBuyLater != null) {
+                    // Update the quantity
+                    existingToBuyLater.Quantity = quantity;
+
+                    // Save the changes to the database
+                    var result = await _context.SaveChangesAsync();
+
+                    // Return success message if changes were saved
+                    return result > 0 ? "Quantity updated successfully" : "No changes were made";
+                }
+                else {
+                    return "Item does not exist in ToBuyLater list";
+                }
+            }
+            catch (Exception ex) {
+                // Log the exception and return a friendly error message
+                Console.WriteLine($"Error: {ex.Message}");
+                return "An error occurred while updating the quantity. Please try again.";
+            }
+        }
+
+
+
 
 
 
