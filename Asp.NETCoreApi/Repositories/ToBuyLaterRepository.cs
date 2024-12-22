@@ -12,21 +12,28 @@ namespace Asp.NETCoreApi.Repositories {
             _context = context;
         }
 
-        public async Task<string> SaveToBuyLater (int sizeId, string userId) {
+        public async Task<MesAndStaDto> SaveToBuyLater (int sizeId, string userId) {
             try {
-                // Check if the size exists
-                var sizeExists = await _context.Sizes.AnyAsync(s => s.SizeId == sizeId);
-                if (!sizeExists) {
-                    return "Size does not exist";
+                // Check if the size exists and fetch its details
+                var size = await _context.Sizes.FirstOrDefaultAsync(s => s.SizeId == sizeId);
+                if (size == null) {
+                    return new MesAndStaDto("Size does not exist", 404); // 404 for Not Found
                 }
+
+                // Check if the stock is sufficient to add an item
+
 
                 // Check if the user already has this size in their ToBuyLater list
                 var existingToBuyLater = await _context.ToBuyLaters
                     .FirstOrDefaultAsync(t => t.UserId == userId && t.SizeId == sizeId);
 
+                if (existingToBuyLater?.Quantity + 1 > size.Stock) {
+                    return new MesAndStaDto("Insufficient stock to add this item", 400); // 400 for Bad Request
+                }
+
                 if (existingToBuyLater != null) {
                     // If it exists, increment the quantity
-                    existingToBuyLater.Quantity++;
+                    existingToBuyLater.Quantity = Math.Max(existingToBuyLater.Quantity + 1, 1); // Ensure quantity stays >= 1
                 }
                 else {
                     // If it doesn't exist, create a new entry with quantity = 1
@@ -43,20 +50,18 @@ namespace Asp.NETCoreApi.Repositories {
                 var result = await _context.SaveChangesAsync();
 
                 // Return success message if changes were saved
-                if (result > 0) {
-                    return "Saved successfully";
-                }
-                else {
-                    return "No changes were made";
-                }
+                return new MesAndStaDto(
+                    result > 0 ? "Saved successfully" : "No changes were made",
+                    result > 0 ? 200 : 400 // 200 for success, 400 for no changes made
+                );
             }
             catch (Exception ex) {
                 // Log the exception and return a friendly error message
-                // You can log the exception using a logger
                 Console.WriteLine($"Error: {ex.Message}");
-                return "An error occurred while saving the item. Please try again.";
+                return new MesAndStaDto("An error occurred while saving the item. Please try again.", 500); // 500 for Internal Server Error
             }
         }
+
 
 
 
@@ -117,17 +122,22 @@ namespace Asp.NETCoreApi.Repositories {
         }
 
 
-        public async Task<string> UpdateQuantityInBuyLater (int sizeId, string userId, int quantity) {
+        public async Task<MesAndStaDto> UpdateQuantityInBuyLater (int sizeId, string userId, int quantity) {
             try {
                 // Validate that quantity is positive
                 if (quantity <= 0) {
-                    return "Quantity must be greater than zero";
+                    return new MesAndStaDto("Quantity must be greater than zero", 400);
                 }
 
-                // Check if the size exists
-                var sizeExists = await _context.Sizes.AnyAsync(s => s.SizeId == sizeId);
-                if (!sizeExists) {
-                    return "Size does not exist";
+                // Check if the size exists and fetch its details
+                var size = await _context.Sizes.FirstOrDefaultAsync(s => s.SizeId == sizeId);
+                if (size == null) {
+                    return new MesAndStaDto("Size does not exist", 404); // 404 for Not Found
+                }
+
+                // Check if the stock is sufficient
+                if (size.Stock < quantity) {
+                    return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
                 }
 
                 // Find the existing ToBuyLater item for the user and size
@@ -142,16 +152,68 @@ namespace Asp.NETCoreApi.Repositories {
                     var result = await _context.SaveChangesAsync();
 
                     // Return success message if changes were saved
-                    return result > 0 ? "Quantity updated successfully" : "No changes were made";
+                    return new MesAndStaDto(
+                       result > 0 ? "Quantity updated successfully" : "No changes were made",
+                       result > 0 ? 200 : 400 // 200 for success, 400 for no changes made
+                    );
                 }
                 else {
-                    return "Item does not exist in ToBuyLater list";
+                    return new MesAndStaDto("Item does not exist in ToBuyLater list", 404); // 404 for Not Found
                 }
             }
             catch (Exception ex) {
                 // Log the exception and return a friendly error message
                 Console.WriteLine($"Error: {ex.Message}");
-                return "An error occurred while updating the quantity. Please try again.";
+                return new MesAndStaDto("An error occurred while updating the quantity. Please try again.", 500); // 500 for Internal Server Error
+            }
+        }
+
+
+
+
+        public async Task<MesAndStaDto> UpdateAddQuantityInBuyLater (int sizeId, string userId, int quantity) {
+            try {
+                // Validate that quantity is positive
+                if (quantity <= 0) {
+                    return new MesAndStaDto("Quantity must be greater than zero", 400);
+                }
+
+                // Check if the size exists and fetch its details
+                var size = await _context.Sizes.FirstOrDefaultAsync(s => s.SizeId == sizeId);
+                if (size == null) {
+                    return new MesAndStaDto("Size does not exist", 404); // 404 for Not Found
+                }
+
+                // Check if the stock is sufficient
+                if (size.Stock < quantity) {
+                    return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
+                }
+
+                // Find the existing ToBuyLater item for the user and size
+                var existingToBuyLater = await _context.ToBuyLaters
+                    .FirstOrDefaultAsync(t => t.UserId == userId && t.SizeId == sizeId);
+
+                if (existingToBuyLater != null) {
+                    // Update the quantity
+                    existingToBuyLater.Quantity = quantity;
+
+                    // Save the changes to the database
+                    var result = await _context.SaveChangesAsync();
+
+                    // Return success message if changes were saved
+                    return new MesAndStaDto(
+                       result > 0 ? "Quantity updated successfully" : "No changes were made",
+                       result > 0 ? 200 : 400 // 200 for success, 400 for no changes made
+                    );
+                }
+                else {
+                    return new MesAndStaDto("Item does not exist in ToBuyLater list", 404); // 404 for Not Found
+                }
+            }
+            catch (Exception ex) {
+                // Log the exception and return a friendly error message
+                Console.WriteLine($"Error: {ex.Message}");
+                return new MesAndStaDto("An error occurred while updating the quantity. Please try again.", 500); // 500 for Internal Server Error
             }
         }
 

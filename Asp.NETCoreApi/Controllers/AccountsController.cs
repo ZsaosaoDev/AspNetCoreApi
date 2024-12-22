@@ -82,18 +82,39 @@ namespace Asp.NETCoreApi.Controllers {
         /// Refreshes tokens and returns the user's role if successful.
         /// </summary>
         [HttpPost("RefreshToken")]
-        public async Task<ActionResult<string>> RefreshToken ([FromBody] string refreshToken) {
-            if (string.IsNullOrEmpty(refreshToken))
-                return BadRequest("Refresh token is required.");
+        public async Task<ActionResult<string>> RefreshToken () {
+            // Get the refresh token from cookies
+            var refreshToken = Request.Cookies["refreshToken"];
 
+            if (string.IsNullOrEmpty(refreshToken)) {
+                return BadRequest("Refresh token is required.");
+            }
+
+            // Attempt to refresh tokens using the provided refresh token
             var result = await _accountRepository.RefreshTokenAsync(refreshToken);
 
-
-            if (result.StatusCode != 200) // Assuming 200 is the success code
+            if (result.StatusCode != 200) { // Assuming 200 is success
                 return Unauthorized(result.Message);
+            }
+
+            // Update cookies with new tokens
+            Response.Cookies.Append("accessToken", result.AccessToken, new CookieOptions {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddMinutes(30)
+            });
+
+            Response.Cookies.Append("refreshToken", result.RefreshToken, new CookieOptions {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddDays(7)
+            });
 
             return Ok(result.Role);
         }
+
 
         /// <summary>
         /// Logs out a user and clears refresh tokens and cookies.

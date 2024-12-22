@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\controllers\\tobuylatercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\controllers\\tobuylatercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\dto\\updatequantityrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\dto\\updatequantityrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\irepositories\\iaccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\irepositories\\iaccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\irepositories\\itobuylaterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\irepositories\\itobuylaterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\repositories\\tobuylaterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\repositories\\tobuylaterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\helper\\accesstokenmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\helper\\accesstokenmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\dto\\colordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\dto\\colordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\dto\\sizedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\dto\\sizedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|c:\\users\\huyvu\\downloads\\asp.netcoreapi\\asp.netcoreapi\\helper\\tokenexpirationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F57C0DE6-7172-4D79-9397-D6A107118572}|Asp.NETCoreApi\\Asp.NETCoreApi.csproj|solutionrelative:asp.netcoreapi\\helper\\tokenexpirationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,83 +34,84 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UpdateQuantityRequestDto.cs",
-              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Dto\\UpdateQuantityRequestDto.cs",
-              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Dto\\UpdateQuantityRequestDto.cs",
-              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Dto\\UpdateQuantityRequestDto.cs",
-              "RelativeToolTip": "Asp.NETCoreApi\\Dto\\UpdateQuantityRequestDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAeAAAAAAAAAA==",
+              "Title": "IAccountRepository.cs",
+              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\IRepositories\\IAccountRepository.cs",
+              "RelativeDocumentMoniker": "Asp.NETCoreApi\\IRepositories\\IAccountRepository.cs",
+              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\IRepositories\\IAccountRepository.cs",
+              "RelativeToolTip": "Asp.NETCoreApi\\IRepositories\\IAccountRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T03:49:02.586Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IToBuyLaterRepository.cs",
-              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\IRepositories\\IToBuyLaterRepository.cs",
-              "RelativeDocumentMoniker": "Asp.NETCoreApi\\IRepositories\\IToBuyLaterRepository.cs",
-              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\IRepositories\\IToBuyLaterRepository.cs",
-              "RelativeToolTip": "Asp.NETCoreApi\\IRepositories\\IToBuyLaterRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T03:46:35.972Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ToBuyLaterController.cs",
-              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Controllers\\ToBuyLaterController.cs",
-              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Controllers\\ToBuyLaterController.cs",
-              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Controllers\\ToBuyLaterController.cs",
-              "RelativeToolTip": "Asp.NETCoreApi\\Controllers\\ToBuyLaterController.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAuwEsAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T03:43:30.194Z",
+              "WhenOpened": "2024-12-20T19:49:20.311Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ColorDto.cs",
-              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Dto\\ColorDto.cs",
-              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Dto\\ColorDto.cs",
-              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Dto\\ColorDto.cs",
-              "RelativeToolTip": "Asp.NETCoreApi\\Dto\\ColorDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAzAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Program.cs",
+              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Program.cs",
+              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Program.cs",
+              "RelativeToolTip": "Asp.NETCoreApi\\Program.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHQAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T22:12:27.713Z",
+              "WhenOpened": "2024-12-20T19:39:26.564Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "SizeDto.cs",
-              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Dto\\SizeDto.cs",
-              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Dto\\SizeDto.cs",
-              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Dto\\SizeDto.cs",
-              "RelativeToolTip": "Asp.NETCoreApi\\Dto\\SizeDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "TokenExpirationMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Helper\\TokenExpirationMiddleware.cs",
+              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Helper\\TokenExpirationMiddleware.cs",
+              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Helper\\TokenExpirationMiddleware.cs",
+              "RelativeToolTip": "Asp.NETCoreApi\\Helper\\TokenExpirationMiddleware.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwDsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T22:08:10.009Z"
+              "WhenOpened": "2024-12-20T19:38:55.34Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ToBuyLaterRepository.cs",
-              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Repositories\\ToBuyLaterRepository.cs",
-              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Repositories\\ToBuyLaterRepository.cs",
-              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Repositories\\ToBuyLaterRepository.cs",
-              "RelativeToolTip": "Asp.NETCoreApi\\Repositories\\ToBuyLaterRepository.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAqwHcAAABmAAAAAAAAAA==",
+              "Title": "AccessTokenMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Helper\\AccessTokenMiddleware.cs",
+              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Helper\\AccessTokenMiddleware.cs",
+              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Helper\\AccessTokenMiddleware.cs",
+              "RelativeToolTip": "Asp.NETCoreApi\\Helper\\AccessTokenMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T22:06:56.992Z",
+              "WhenOpened": "2024-12-20T19:38:40.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountRepository.cs",
+              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Repositories\\AccountRepository.cs",
+              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Repositories\\AccountRepository.cs",
+              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Repositories\\AccountRepository.cs",
+              "RelativeToolTip": "Asp.NETCoreApi\\Repositories\\AccountRepository.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAQwCQAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T19:33:12.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountsController.cs",
+              "DocumentMoniker": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Controllers\\AccountsController.cs",
+              "RelativeDocumentMoniker": "Asp.NETCoreApi\\Controllers\\AccountsController.cs",
+              "ToolTip": "C:\\Users\\huyvu\\Downloads\\Asp.NETCoreApi\\Asp.NETCoreApi\\Controllers\\AccountsController.cs",
+              "RelativeToolTip": "Asp.NETCoreApi\\Controllers\\AccountsController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T19:31:01.944Z",
               "EditorCaption": ""
             }
           ]

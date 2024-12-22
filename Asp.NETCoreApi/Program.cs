@@ -132,7 +132,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication(); // Xác thực JWT (Cookie chứa token)
 app.UseAuthorization();   // Kiểm tra quyền hạn
 
-//app.UseMiddleware<AccessTokenMiddleware>();
+//app.UseMiddleware<TokenExpirationMiddleware>();
 
 // Map Controllers
 app.MapControllers();
