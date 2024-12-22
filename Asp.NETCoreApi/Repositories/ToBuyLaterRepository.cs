@@ -171,46 +171,71 @@ namespace Asp.NETCoreApi.Repositories {
 
 
 
-        public async Task<MesAndStaDto> UpdateAddQuantityInBuyLater (int sizeId, string userId, int quantity) {
-            try {
+        public async Task<MesAndStaDto> UpdateAddQuantityInBuyLater(int sizeId, string userId, int quantity)
+        {
+            try
+            {
                 // Validate that quantity is positive
-                if (quantity <= 0) {
+                if (quantity <= 0)
+                {
                     return new MesAndStaDto("Quantity must be greater than zero", 400);
                 }
 
                 // Check if the size exists and fetch its details
                 var size = await _context.Sizes.FirstOrDefaultAsync(s => s.SizeId == sizeId);
-                if (size == null) {
+                if (size == null)
+                {
                     return new MesAndStaDto("Size does not exist", 404); // 404 for Not Found
-                }
-
-                // Check if the stock is sufficient
-                if (size.Stock < quantity) {
-                    return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
                 }
 
                 // Find the existing ToBuyLater item for the user and size
                 var existingToBuyLater = await _context.ToBuyLaters
                     .FirstOrDefaultAsync(t => t.UserId == userId && t.SizeId == sizeId);
 
-                if (existingToBuyLater != null) {
-                    // Update the quantity
-                    existingToBuyLater.Quantity = quantity;
+                // Check if the stock is sufficient
+                if (size.Stock < quantity)
+                {
+                    return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
+                }
+
+                if (existingToBuyLater != null)
+                {
+                    // If the item exists, update the quantity
+                    existingToBuyLater.Quantity += quantity; // Increase the existing quantity by the new quantity
 
                     // Save the changes to the database
                     var result = await _context.SaveChangesAsync();
 
                     // Return success message if changes were saved
                     return new MesAndStaDto(
-                       result > 0 ? "Quantity updated successfully" : "No changes were made",
-                       result > 0 ? 200 : 400 // 200 for success, 400 for no changes made
+                        result > 0 ? "Quantity updated successfully" : "No changes were made",
+                        result > 0 ? 200 : 400 // 200 for success, 400 for no changes made
                     );
                 }
-                else {
-                    return new MesAndStaDto("Item does not exist in ToBuyLater list", 404); // 404 for Not Found
+                else
+                {
+                    // If the item does not exist, create a new entry
+                    var toBuyLater = new ToBuyLater
+                    {
+                        SizeId = sizeId,
+                        UserId = userId,
+                        Quantity = quantity // Set the quantity to the provided value
+                    };
+
+                    _context.ToBuyLaters.Add(toBuyLater);
+
+                    // Save the changes to the database
+                    var result = await _context.SaveChangesAsync();
+
+                    // Return success message if the new item was added successfully
+                    return new MesAndStaDto(
+                        result > 0 ? "Item added to Buy Later successfully" : "Failed to add item to Buy Later",
+                        result > 0 ? 200 : 400 // 200 for success, 400 for failure
+                    );
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 // Log the exception and return a friendly error message
                 Console.WriteLine($"Error: {ex.Message}");
                 return new MesAndStaDto("An error occurred while updating the quantity. Please try again.", 500); // 500 for Internal Server Error
