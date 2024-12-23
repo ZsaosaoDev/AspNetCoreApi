@@ -6,7 +6,7 @@
 
         public int Quantity { get; set; }
 
-        Size Size { get; set; } // Navigation property
+        public Size Size { get; set; } // Navigation property
 
         public string UserId { get; set; } // Foreign key
 

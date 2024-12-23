@@ -184,18 +184,21 @@ namespace Asp.NETCoreApi.Repositories {
                     return new MesAndStaDto("Size does not exist", 404); // 404 for Not Found
                 }
 
-                // Check if the stock is sufficient
-                if (size.Stock < quantity) {
-                    return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
-                }
+
 
                 // Find the existing ToBuyLater item for the user and size
                 var existingToBuyLater = await _context.ToBuyLaters
                     .FirstOrDefaultAsync(t => t.UserId == userId && t.SizeId == sizeId);
 
+
+                // Check if the stock is sufficient
+                if (size.Stock < existingToBuyLater?.Quantity + quantity) {
+                    return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
+                }
+
                 if (existingToBuyLater != null) {
                     // Update the quantity
-                    existingToBuyLater.Quantity = quantity;
+                    existingToBuyLater.Quantity += quantity;
 
                     // Save the changes to the database
                     var result = await _context.SaveChangesAsync();
@@ -217,12 +220,30 @@ namespace Asp.NETCoreApi.Repositories {
             }
         }
 
+        public async Task<MesAndStaDto> RemoveFromBuyLater (int sizeId, string userId) {
+            var size = await _context.Sizes.FirstOrDefaultAsync(s => s.SizeId == sizeId);
+            if (size == null) {
+                return new MesAndStaDto("Size does not exist", 404); // 404 for Not Found
+            }
 
+            var existingToBuyLater = await _context.ToBuyLaters
+                .FirstOrDefaultAsync(t => t.UserId == userId && t.SizeId == sizeId);
 
+            if (existingToBuyLater == null) {
+                return new MesAndStaDto("Item not found in 'Buy Later' list", 404); // 404 for Not Found
+            }
 
+            _context.ToBuyLaters.Remove(existingToBuyLater);
 
-
-
+            try {
+                await _context.SaveChangesAsync();
+                return new MesAndStaDto("Item removed from 'Buy Later' list successfully", 200); // 200 for OK
+            }
+            catch (Exception ex) {
+                // Log the exception (if a logging system is in place)
+                return new MesAndStaDto($"An error occurred while removing the item: {ex.Message}", 500); // 500 for Internal Server Error
+            }
+        }
 
     }
 

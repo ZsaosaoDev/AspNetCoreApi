@@ -10,5 +10,7 @@ namespace Asp.NETCoreApi.IRepositories {
         Task<MesAndStaDto> UpdateQuantityInBuyLater (int sizeId, string userId, int quantity);
         Task<MesAndStaDto> UpdateAddQuantityInBuyLater (int sizeId, string userId, int quantity);
 
+        Task<MesAndStaDto> RemoveFromBuyLater (int sizeId, string userId);
+
     }
 }

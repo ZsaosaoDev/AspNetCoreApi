@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Asp.NETCoreApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20241218211028_init2")]
+    [Migration("20241223054346_init2")]
     partial class init2
     {
         /// <inheritdoc />
@@ -90,61 +90,6 @@ namespace Asp.NETCoreApi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Asp.NETCoreApi.Data.Blog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("ImageData")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ImageMimeType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Blogs");
-                });
-
-            modelBuilder.Entity("Asp.NETCoreApi.Data.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Books");
-                });
-
             modelBuilder.Entity("Asp.NETCoreApi.Data.Color", b =>
                 {
                     b.Property<int>("ColorId")
@@ -171,6 +116,26 @@ namespace Asp.NETCoreApi.Migrations
                     b.ToTable("Colors");
                 });
 
+            modelBuilder.Entity("Asp.NETCoreApi.Data.Deliver", b =>
+                {
+                    b.Property<int>("DeliverId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeliverId"));
+
+                    b.Property<string>("DeliverType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Fee")
+                        .HasColumnType("real");
+
+                    b.HasKey("DeliverId");
+
+                    b.ToTable("Delivers");
+                });
+
             modelBuilder.Entity("Asp.NETCoreApi.Data.Image", b =>
                 {
                     b.Property<int>("ImageId")
@@ -191,6 +156,92 @@ namespace Asp.NETCoreApi.Migrations
                     b.HasIndex("ColorId");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("Asp.NETCoreApi.Data.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DeliverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("DeliverId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Asp.NETCoreApi.Data.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"));
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("Asp.NETCoreApi.Data.Payment", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
+
+                    b.Property<string>("MeThodPayment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PaymentId");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Asp.NETCoreApi.Data.Product", b =>
@@ -316,6 +367,8 @@ namespace Asp.NETCoreApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ToBuyLaterId");
+
+                    b.HasIndex("SizeId");
 
                     b.ToTable("ToBuyLaters");
                 });
@@ -475,6 +528,36 @@ namespace Asp.NETCoreApi.Migrations
                     b.Navigation("Color");
                 });
 
+            modelBuilder.Entity("Asp.NETCoreApi.Data.Order", b =>
+                {
+                    b.HasOne("Asp.NETCoreApi.Data.Deliver", "Delivery")
+                        .WithMany("Orders")
+                        .HasForeignKey("DeliverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Asp.NETCoreApi.Data.Payment", "Payment")
+                        .WithMany("Orders")
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Delivery");
+
+                    b.Navigation("Payment");
+                });
+
+            modelBuilder.Entity("Asp.NETCoreApi.Data.OrderDetail", b =>
+                {
+                    b.HasOne("Asp.NETCoreApi.Data.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Asp.NETCoreApi.Data.Product", b =>
                 {
                     b.HasOne("Asp.NETCoreApi.Data.ProductCategory", "ProductCategory")
@@ -506,6 +589,17 @@ namespace Asp.NETCoreApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Color");
+                });
+
+            modelBuilder.Entity("Asp.NETCoreApi.Data.ToBuyLater", b =>
+                {
+                    b.HasOne("Asp.NETCoreApi.Data.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -564,6 +658,16 @@ namespace Asp.NETCoreApi.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("Sizes");
+                });
+
+            modelBuilder.Entity("Asp.NETCoreApi.Data.Deliver", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Asp.NETCoreApi.Data.Payment", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Asp.NETCoreApi.Data.Product", b =>

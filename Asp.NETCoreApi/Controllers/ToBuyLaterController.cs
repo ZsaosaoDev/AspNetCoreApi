@@ -106,5 +106,29 @@ namespace Asp.NETCoreApi.Controllers {
                 return StatusCode(500, new { message = "An error occurred", error = ex.Message });
             }
         }
+
+        [Authorize(Roles = AppRole.Customer)]
+        [HttpPost("RemoveFromBuyLater")]
+        public async Task<IActionResult> RemoveProductFromBuyLater ([FromBody] int sizeId) {
+            // Extract UserId from token
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId)) {
+                return Unauthorized(new { message = "User ID not found" });
+            }
+
+            try {
+                // Call the repository method
+                var result = await _toBuyLaterRepository.RemoveFromBuyLater(sizeId, userId);
+
+                if (result.Status == 200) {
+                    return Ok(new { message = result.Message });
+                }
+                return StatusCode(result.Status, new { message = result.Message });
+            }
+            catch (Exception ex) {
+                return StatusCode(500, new { message = "An error occurred", error = ex.Message });
+            }
+        }
     }
 }

@@ -108,6 +108,68 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Asp.NETCoreApi.Controllers.DeliveryController",
+    "Method": "AddDelivery",
+    "RelativePath": "api/addDelivery",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "deliveryDto",
+        "Type": "Asp.NETCoreApi.Dto.DeliveryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Asp.NETCoreApi.Controllers.PaymentController",
+    "Method": "AddPayment",
+    "RelativePath": "api/addMethodPayment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentDto",
+        "Type": "Asp.NETCoreApi.Dto.PaymentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Asp.NETCoreApi.Controllers.DeliveryController",
+    "Method": "GetAllDeliveries",
+    "RelativePath": "api/allDelivery",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Asp.NETCoreApi.Controllers.PaymentController",
+    "Method": "GetAllPayments",
+    "RelativePath": "api/allMethodPayment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Asp.NETCoreApi.Controllers.OrderHistoryController",
+    "Method": "GetOrdersByUserId",
+    "RelativePath": "api/GetOrdersByUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Asp.NETCoreApi.Controllers.ProductController",
     "Method": "GetProductById",
     "RelativePath": "api/getProductById",
@@ -134,6 +196,22 @@
     ]
   },
   {
+    "ContainingType": "Asp.NETCoreApi.Controllers.OrderHistoryController",
+    "Method": "GetProductsByOrderIdAsync",
+    "RelativePath": "api/GetProductsByOrderIdAsync",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Asp.NETCoreApi.Controllers.ToBuyLaterController",
     "Method": "GetProductsWithSelectedColors",
     "RelativePath": "api/GetProductsWithSelectedColors",
@@ -141,6 +219,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Asp.NETCoreApi.Controllers.OrderController",
+    "Method": "Order",
+    "RelativePath": "api/Order",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Asp.NETCoreApi.Dto.OrderRequestDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -207,6 +301,22 @@
         "Name": "pageNumber",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Asp.NETCoreApi.Controllers.ToBuyLaterController",
+    "Method": "RemoveProductFromBuyLater",
+    "RelativePath": "api/RemoveFromBuyLater",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sizeId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

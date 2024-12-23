@@ -5,8 +5,6 @@ namespace Asp.NETCoreApi.Data {
     public class MyDbContext : IdentityDbContext<ApplicationUser> {
         public MyDbContext (DbContextOptions<MyDbContext> options) : base(options) { }
 
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Blog> Blogs { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public DbSet<ProductCategory> ProductCategories { get; set; }
@@ -15,6 +13,15 @@ namespace Asp.NETCoreApi.Data {
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<ToBuyLater> ToBuyLaters { get; set; }
+
+        public DbSet<Payment> Payments { get; set; }
+
+        public DbSet<Deliver> Delivers { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
 
         protected override void OnModelCreating (ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder); // This ensures Identity tables are configured properly

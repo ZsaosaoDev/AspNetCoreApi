@@ -117,7 +117,6 @@ namespace Asp.NETCoreApi.Repositories {
         }
 
         public async Task<LogDto> SignUpAsync (SignUpDto model) {
-
             var existingUser = await _userManager.FindByEmailAsync(model.Email);
             if (existingUser != null) {
                 return new LogDto("The email is already registered.", 400);
@@ -133,8 +132,29 @@ namespace Asp.NETCoreApi.Repositories {
                 await _roleManager.CreateAsync(new IdentityRole(AppRole.Customer));
 
             await _userManager.AddToRoleAsync(user, AppRole.Customer);
-            return await SignInAsync(new SignInDto { Email = model.Email, Password = model.Password });
+
+            // Generate claims and tokens explicitly
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, AppRole.Customer)
+            };
+
+            var accessToken = GenerateAccessToken(claims);
+            var refreshToken = new RefreshToken {
+                Token = GenerateRefreshToken(),
+                ExpiryDate = DateTime.UtcNow.AddDays(7),
+                UserId = user.Id
+            };
+
+            _context.RefreshTokens.Add(refreshToken);
+            await _context.SaveChangesAsync();
+
+            return new LogDto("User registered successfully", AppRole.Customer, accessToken, refreshToken.Token);
         }
+
 
         public async Task LogoutAsync (string userId) {
             var tokens = _context.RefreshTokens.Where(rt => rt.UserId == userId);
