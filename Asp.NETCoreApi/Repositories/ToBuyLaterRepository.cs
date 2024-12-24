@@ -171,35 +171,35 @@ namespace Asp.NETCoreApi.Repositories {
 
 
 
-        public async Task<MesAndStaDto> UpdateAddQuantityInBuyLater(int sizeId, string userId, int quantity)
-        {
-            try
-            {
+        public async Task<MesAndStaDto> UpdateAddQuantityInBuyLater (int sizeId, string userId, int quantity) {
+            try {
                 // Validate that quantity is positive
-                if (quantity <= 0)
-                {
+                if (quantity <= 0) {
                     return new MesAndStaDto("Quantity must be greater than zero", 400);
                 }
 
                 // Check if the size exists and fetch its details
                 var size = await _context.Sizes.FirstOrDefaultAsync(s => s.SizeId == sizeId);
-                if (size == null)
-                {
+                if (size == null) {
                     return new MesAndStaDto("Size does not exist", 404); // 404 for Not Found
                 }
 
                 // Check if the stock is sufficient
-                if (size.Stock < quantity) {
-                    return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
-                }
+
 
                 // Find the existing ToBuyLater item for the user and size
                 var existingToBuyLater = await _context.ToBuyLaters
                     .FirstOrDefaultAsync(t => t.UserId == userId && t.SizeId == sizeId);
 
+
+
                 if (existingToBuyLater != null) {
+
+                    if (existingToBuyLater.Quantity + quantity > size.Stock) {
+                        return new MesAndStaDto("Insufficient stock for the requested quantity", 400); // 400 for Bad Request
+                    }
                     // Update the quantity
-                    existingToBuyLater.Quantity = quantity;
+                    existingToBuyLater.Quantity += quantity;
 
                     // Save the changes to the database
                     var result = await _context.SaveChangesAsync();
@@ -210,11 +210,9 @@ namespace Asp.NETCoreApi.Repositories {
                         result > 0 ? 200 : 400 // 200 for success, 400 for no changes made
                     );
                 }
-                else
-                {
+                else {
                     // If the item does not exist, create a new entry
-                    var toBuyLater = new ToBuyLater
-                    {
+                    var toBuyLater = new ToBuyLater {
                         SizeId = sizeId,
                         UserId = userId,
                         Quantity = quantity // Set the quantity to the provided value
@@ -232,8 +230,7 @@ namespace Asp.NETCoreApi.Repositories {
                     );
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 // Log the exception and return a friendly error message
                 Console.WriteLine($"Error: {ex.Message}");
                 return new MesAndStaDto("An error occurred while updating the quantity. Please try again.", 500); // 500 for Internal Server Error

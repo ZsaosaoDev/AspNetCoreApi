@@ -16,11 +16,6 @@ namespace Asp.NETCoreApi.Repositories {
         }
 
 
-        //public int GetIdByName (string name) {
-        //    var productCategory = _context.ProductCategories
-        //        .FirstOrDefault(x => EF.Functions.Like(x.Name, $"%{name}%"));
-        //    return productCategory?.ProductCategoryId ?? 0;
-        //}
 
         public async Task<List<ProductCategoryDto>> GetAllProductCategories () {
             // Lấy dữ liệu từ database

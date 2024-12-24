@@ -82,40 +82,6 @@ namespace Asp.NETCoreApi.Repositories {
             return new LogDto("Login successful", role.FirstOrDefault(), accessToken, refreshToken.Token);
         }
 
-        public async Task<LogDto> RefreshTokenAsync (string refreshToken) {
-            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(rt => rt.Token == refreshToken);
-            if (storedToken == null || storedToken.ExpiryDate <= DateTime.UtcNow)
-                return new LogDto("Invalid or expired refresh token.");
-
-            var user = await _userManager.FindByIdAsync(storedToken.UserId);
-            if (user == null)
-                return new LogDto("User not found.");
-
-            _context.RefreshTokens.Remove(storedToken);
-
-            var newRefreshToken = new RefreshToken {
-                Token = GenerateRefreshToken(),
-                ExpiryDate = DateTime.UtcNow.AddDays(7),
-                UserId = user.Id
-            };
-
-            await _context.RefreshTokens.AddAsync(newRefreshToken);
-            await _context.SaveChangesAsync();
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            var roles = await _userManager.GetRolesAsync(user);
-            roles.ToList().ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));
-
-            var accessToken = GenerateAccessToken(claims);
-            return new LogDto("Token refreshed successfully", roles.FirstOrDefault(), accessToken, newRefreshToken.Token);
-        }
-
         public async Task<LogDto> SignUpAsync (SignUpDto model) {
             var existingUser = await _userManager.FindByEmailAsync(model.Email);
             if (existingUser != null) {
@@ -154,6 +120,42 @@ namespace Asp.NETCoreApi.Repositories {
 
             return new LogDto("User registered successfully", AppRole.Customer, accessToken, refreshToken.Token);
         }
+
+        public async Task<LogDto> RefreshTokenAsync (string refreshToken) {
+            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(rt => rt.Token == refreshToken);
+            if (storedToken == null || storedToken.ExpiryDate <= DateTime.UtcNow)
+                return new LogDto("Invalid or expired refresh token.");
+
+            var user = await _userManager.FindByIdAsync(storedToken.UserId);
+            if (user == null)
+                return new LogDto("User not found.");
+
+            _context.RefreshTokens.Remove(storedToken);
+
+            var newRefreshToken = new RefreshToken {
+                Token = GenerateRefreshToken(),
+                ExpiryDate = DateTime.UtcNow.AddDays(7),
+                UserId = user.Id
+            };
+
+            await _context.RefreshTokens.AddAsync(newRefreshToken);
+            await _context.SaveChangesAsync();
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+
+            var roles = await _userManager.GetRolesAsync(user);
+            roles.ToList().ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));
+
+            var accessToken = GenerateAccessToken(claims);
+            return new LogDto("Token refreshed successfully", roles.FirstOrDefault(), accessToken, newRefreshToken.Token);
+        }
+
+
 
 
         public async Task LogoutAsync (string userId) {
