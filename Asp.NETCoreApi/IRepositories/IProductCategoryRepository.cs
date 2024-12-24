@@ -11,7 +11,7 @@ namespace Asp.NETCoreApi.IRepositories {
 
         Task<List<ProductCategoryDto>> GetProductCategories (string name);
 
-        Task<PaginatedDto<ProductDto>> GetProductsWithPagination (string name, int pageNumber, int pageSize);
+        Task<PaginatedDto<ProductDto>> GetProductsWithPagination (string name, int pageNumber, int pageSize, string productName);
 
     }
 }

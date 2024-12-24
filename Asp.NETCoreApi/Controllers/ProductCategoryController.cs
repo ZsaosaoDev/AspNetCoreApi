@@ -38,10 +38,10 @@ namespace Asp.NETCoreApi.Controllers {
 
         [HttpGet]
         [Route("api/productcategories/pagination")]
-        public async Task<IActionResult> GetProductCategoriesWithPagination (string name, int pageNumber = 1) {
+        public async Task<IActionResult> GetProductCategoriesWithPagination (string name, string productName, int pageNumber = 1) {
             int pageSize = 8;
             try {
-                var result = await _productCategoryRepository.GetProductsWithPagination(name, pageNumber, pageSize);
+                var result = await _productCategoryRepository.GetProductsWithPagination(name, pageNumber, pageSize, productName);
                 return Ok(result);
             }
             catch (Exception ex) {

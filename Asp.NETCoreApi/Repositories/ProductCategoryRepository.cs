@@ -90,14 +90,16 @@ namespace Asp.NETCoreApi.Repositories {
             return productCategoryDtos;
         }
 
-        public async Task<PaginatedDto<ProductDto>> GetProductsWithPagination (string categoryName, int pageNumber, int pageSize) {
+        public async Task<PaginatedDto<ProductDto>> GetProductsWithPagination (string categoryName, int pageNumber, int pageSize, string productName) {
             // Truy vấn sản phẩm liên quan đến danh mục
             var query = _context.Products
-                .Include(p => p.Colors)
-                    .ThenInclude(c => c.Sizes)
-                .Include(p => p.Colors)
-                    .ThenInclude(c => c.Images)
-                .Where(p => EF.Functions.Like(p.ProductCategory.Name, $"%{categoryName}%"));
+            .Include(p => p.Colors)
+                .ThenInclude(c => c.Sizes)
+            .Include(p => p.Colors)
+                .ThenInclude(c => c.Images)
+            .Where(p => EF.Functions.Like(p.ProductCategory.Name, $"%{categoryName}%")
+                && EF.Functions.Like(p.Name, $"%{productName}%"));
+
 
             // Tổng số lượng sản phẩm
             var totalItems = await query.CountAsync();
